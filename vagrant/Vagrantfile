@@ -1,0 +1,35 @@
+Vagrant.configure("2") do |config|
+  #Setup a Centos VM
+  config.vm.define "demo" do |demo|
+    demo.vm.box = "centos/7"
+	demo.vm.box_version = "1707.01"
+	demo.vm.provider "virtualbox" do |vb|
+		vb.memory = "4096"
+		vb.cpus = 1 
+	end
+	
+	#Setup a shared folder
+	demo.vm.synced_folder "./shared", "/vagrant", disabled: false
+	
+	#Don't check for OS updates on start
+	demo.vm.box_check_update = false
+	
+	#Forward ports for SSH and HTTP
+	demo.vm.network "forwarded_port", guest: 22, host: 1021
+	demo.vm.network "forwarded_port", guest: 80, host: 1080
+	demo.vm.network "forwarded_port", guest: 443, host: 1443
+	
+	#Place your SSH keys here: keys/public and keys/private
+	#There's probably a better way to do this!
+	demo.ssh.insert_key = false
+	demo.vm.provision "file", source: "keys/public", destination: "~/.ssh/authorized_keys"
+    demo.ssh.private_key_path = ["keys/private", "~/.vagrant.d/private_key"]
+	demo.vm.provision "shell", inline: <<-EOC
+        sudo sed -i -e "\\#PasswordAuthentication yes# s#PasswordAuthentication yes#PasswordAuthentication no#g" /etc/ssh/sshd_config
+        sudo systemctl restart sshd
+	EOC
+	
+	#Install packages
+	config.vm.provision "shell", inline: "sudo yum -y install vim docker"
+	end
+end

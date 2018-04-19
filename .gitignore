@@ -1,0 +1,9 @@
+**/keys/*
+!**/keys/readme.txt
+**/certs/*
+!**/certs/readme.txt
+vagrant/.vagrant/*
+**/*~
+**/#*#
+**/*.swp
+**/*.swn

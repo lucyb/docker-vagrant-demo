@@ -1,0 +1,26 @@
+ $ vagrant up
+Start virtual machine.
+
+ $ vagrant ssh
+SSH into virtual machine.
+
+ $ vagrant halt
+Halt virtual machine.
+
+ $ vagrant snapshot save [NAME]
+Save a new named snapshot.
+
+ $ vagrant snapshot restore [NAME]
+Restore a new named snapshot.
+
+ $ vagrant snapshot list
+List all snapshots taken.
+
+ $ vagrant provision
+Reconfigure the virtual machine after a source code change.
+
+ $ vagrant reload
+Reload the virtual machine. Useful when you need to change network or synced folder settings.
+
+ $ vagrant share
+Share your virtual machine to the world via a temporary and unique url.
