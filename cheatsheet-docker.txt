@@ -1,2 +1,77 @@
-docker
+# Docker Cheatsheet
 
+## List Docker CLI commands
+
+```
+docker
+docker container --help
+```
+
+## Display Docker version and info
+
+```
+docker --version
+docker version
+docker info
+```
+
+## Execute Docker image
+
+```
+docker run hello-world
+```
+
+## List Docker images
+
+```
+docker image ls
+```
+
+## List Docker containers (running, all, all in quiet mode)
+
+```
+docker container ls
+docker container ls --all
+docker container ls -aq
+```
+
+## Building an image
+
+```
+docker build -t friendlyhello .  # Create image using this directory's Dockerfile
+docker run -p 4000:80 friendlyhello  # Run "friendlyname" mapping port 4000 to 80
+docker run -d -p 4000:80 friendlyhello         # Same thing, but in detached mode
+```
+
+The build process is initiated by a Docker client and happens on the Docker server. 
+
+Automatically entries under current directory are added to the build context, which can lead to large builds and large images.
+
+Only files and directories in the build context can be added during build.
+
+Best practice is to only place files and directories that you need to add to image under current directory.
+
+https://runnable.com/docker/rails/building-your-docker-image
+Images are built incrementally, with each Dockerfile instruction (or build step) being executed in a temporary intermediate container. The result is a sequence of intermediate images (one per Dockerfile instruction). This model extends itself well to reusing these pre-built intermediate images to save resources and time for future builds (a.k.a. Docker cache).
+
+## Docker Registry
+
+```
+docker login             # Log in this CLI session using your Docker credentials
+docker tag <image> username/repository:tag  # Tag <image> for upload to registry
+docker push username/repository:tag            # Upload tagged image to registry
+docker run username/repository:tag                   # Run image from a registry
+```
+
+## Docker Swarm
+
+```
+docker stack ls                                            # List stacks or apps
+docker stack deploy -c <composefile> <appname>  # Run the specified Compose file
+docker service ls                 # List running services associated with an app
+docker service ps <service>                  # List tasks associated with an app
+docker inspect <task or container>                   # Inspect task or container
+docker container ls -q                                      # List container IDs
+docker stack rm <appname>                             # Tear down an application
+docker swarm leave --force      # Take down a single node swarm from the manager
+```
