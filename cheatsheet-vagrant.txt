@@ -1,5 +1,8 @@
+ $ vagrant init centos/7
+Provision a virtual machine, using the latest centos image from the Vagrant Cloud
+ 
  $ vagrant up
-Start virtual machine.
+Start virtual machine. If no machine exists, it will provision it using the vagrantfile in that directory
 
  $ vagrant ssh
 SSH into virtual machine.
