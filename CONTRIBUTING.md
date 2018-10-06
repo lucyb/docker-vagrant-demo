@@ -1,6 +1,12 @@
 # Contributing
 
+First off, thanks for taking the time to contribute! 
+
 We welcome and encourage contributors.
+
+This project and everyone contributing to it is governed by the code of conduct. No specialist programming knowledge is needed to contribute to the project.
+
+The project is intended to help people get started with docker and vagrant using practical examples, whether in a workshop or as part of indiviudal learning. It should be accessible to anyone with some familarity of the command line.
 
 ## How to contribute
 
